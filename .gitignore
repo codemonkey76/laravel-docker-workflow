@@ -1,1 +1,16 @@
 # Ignored
+/src/.env
+/src/.env.backup
+/src/.phpunit.result.cache
+/src/bootstrap/cache/*
+/src/storage/framework/cache/*
+/src/storage/framework/sessions/*
+/src/storage/framework/testing/*
+/src/storage/framework/views/*
+/src/storage/**/*.log
+/src/storage/*.key
+/src/public/storage
+/src/public/hot
+/src/node_modules
+/src/npm-debug.log
+/src/vendor
