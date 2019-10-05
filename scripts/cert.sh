@@ -1,6 +1,3 @@
-
-
-
 DOMAINS=(api.bayareawebpro.com)
 mkdir -p "./data/certbot/conf/live/$DOMAINS"
 
@@ -12,7 +9,7 @@ done
 docker-compose run --rm --entrypoint "certbot certonly
 --webroot -w /var/www/certbot
 --staging
-$DOMAIN_ARGS
+-d api.bayareawebpro.com
 --rsa-key-size 4096
 --agree-tos
 --register-unsafely-without-email

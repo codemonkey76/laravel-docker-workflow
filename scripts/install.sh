@@ -34,7 +34,6 @@ fi
 if [ ! -d "/root/app" ]; then
   echo "Installing Application..."
   mkdir /root/app
-  chown -R www-data: /root/app
   cd /root/app || exit 1
   git init .
   git remote add origin https://github.com/bayareawebpro/laravel-docker-workflow.git
@@ -46,16 +45,18 @@ if [ ! -f "/root/app/src/.env" ]; then
   cp /root/app/src/.env.example /root/app/src/.env
 fi
 
-
 # Make App Directory
 echo "Pulling Master Branch..."
 cd /root/app || exit 1
-
 git pull origin master
+
+# Set Permissions
+chown -R www-data: /root/app/src/storage
 
 # Install PHP Dependencies
 echo "Installing Dependancies..."
 docker-compose run --rm --name=php_composer --entrypoint "composer install" php
+docker-compose run --rm --name=php_composer --entrypoint "php artisan key:generate" php
 
 echo "Starting Application..."
 docker-compose up
