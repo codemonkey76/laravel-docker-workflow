@@ -30,7 +30,7 @@ fi
 
 # Make App Directory
 if [ ! -f "/root/app/src/.env" ]; then
-  echo "Installing Application..."
+  echo "Installing Application Environment File..."
   cp /root/app/src/.env.example /root/app/src/.env
 fi
 
