@@ -25,8 +25,8 @@ if [ ! -f "/root/data/certbot/www/privkey.pem" ]; then
   -nodes
   -newkey rsa:1024
   -days 365
-  -keyout /root/data/certbot/www/privkey.pem
-  -out /root/data/certbot/www/fullchain.pem
+  -keyout /root/app/data/certbot/www/privkey.pem
+  -out /root/app/data/certbot/www/fullchain.pem
   -subj '/CN=localhost'" certbot
 fi
 
