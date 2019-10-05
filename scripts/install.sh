@@ -1,5 +1,6 @@
 #!/bin/bash
 #/bin/bash /root/app/deploy.sh
+DOMAIN="api.bayareawebpro.com"
 
 # Set HuePages
 if grep -q "never" /sys/kernel/mm/transparent_hugepage/enabled; then
@@ -19,15 +20,9 @@ else
 fi
 
 # Add SelfSigned Certificate (will be overwritten by CertBot)
-if [ ! -f "/root/data/certbot/www/privkey.pem" ]; then
-  docker-compose run --rm --entrypoint "openssl req
-  -x509
-  -nodes
-  -newkey rsa:1024
-  -days 365
-  -keyout /var/www/certbot/privkey.pem
-  -out /var/www/certbot/fullchain.pem
-  -subj '/CN=localhost'" certbot
+CERT_DIR=/root/app/data/certbot/conf/live/$DOMAIN
+if [ ! -d "$CERT_DIR" ]; then
+  openssl req -x509 -nodes -newkey rsa:1024 -days 365 -keyout $CERT_DIR/privkey.pem -out $CERT_DIR/fullchain.pem -subj '/CN=localhost'
 fi
 
 # Make App Directory
