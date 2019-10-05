@@ -29,6 +29,12 @@ if [ ! -d "/root/app" ]; then
 fi
 
 # Make App Directory
+if [ ! -f "/root/app/src/.env" ]; then
+  echo "Installing Application..."
+  cp /root/app/src/.env.example /root/app/src/.env
+fi
+
+# Make App Directory
 echo "Pulling Master Branch..."
 cd /root/app || exit 1
 
