@@ -1,7 +1,7 @@
 name: tests
 on: push
-  branches:
-    - master
+      branches:
+        - master
 jobs:
   phpunit:
     runs-on: ubuntu-latest
