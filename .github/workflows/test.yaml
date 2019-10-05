@@ -17,10 +17,10 @@ jobs:
           cd ./src
           composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - name: Install NPM Dependencies
-          run: |
-            cd ./src
-            npm install
-            npm run prod
+        run: |
+          cd ./src
+          npm install
+          npm run prod
       - name: Prepare Laravel Application
         run: |
           cd ./src
