@@ -1,0 +1,17 @@
+# The MySQL  Server configuration file.
+# http://dev.mysql.com/doc/mysql/en/server-system-variables.html
+
+[mysqld]
+socket		= /var/run/mysqld/mysqld.sock
+pid-file	= /var/lib/mysql/mysqld.pid
+log-error	= /var/log/mysql/error.log
+datadir		= /var/lib/mysql
+
+# Localhost Only
+# bind-address	= 127.0.0.1
+
+# Disabling SymbolicLinks for Security
+symbolic-links=0
+
+# Disable Explicit Timestamps
+explicit_defaults_for_timestamp=1

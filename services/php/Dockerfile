@@ -1,0 +1,1 @@
+FROM bayareawebpro/laravel-docker:latest
