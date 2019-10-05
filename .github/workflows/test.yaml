@@ -13,10 +13,15 @@ jobs:
         with:
           fetch-depth: 1
       - name: Composer dependencies
-        run: cd ./src && composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        run: |
+          cd ./src
+          composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - name: Prepare Laravel Application
         run: |
+          cd ./src
           cp .env.example .env
           php artisan key:generate
       - name: Run Testsuite
-        run: vendor/bin/phpunit tests/
+        run: |
+          cd ./src
+          vendor/bin/phpunit
