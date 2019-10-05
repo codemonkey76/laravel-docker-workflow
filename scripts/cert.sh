@@ -1,4 +1,5 @@
-docker-compose run --rm --entrypoint "openssl req -x509 -nodes -newkey rsa:1024 -days 365 -keyout /var/www/certbot/privkey.pem -out /var/www/certbot/fullchain.pem -subj '/CN=localhost'" certbot
+
+
 
 DOMAINS=(api.bayareawebpro.com)
 mkdir -p "./data/certbot/conf/live/$DOMAINS"

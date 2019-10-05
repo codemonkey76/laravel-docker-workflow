@@ -18,6 +18,18 @@ else
   echo "Enabled vm.overcommit_memory..."
 fi
 
+# Make Self Signed Certificate (so nginx works)
+if [ ! -f "/root/data/certbot/www/privkey.pem" ]; then
+  docker-compose run --rm --entrypoint "openssl req
+  -x509
+  -nodes
+  -newkey rsa:1024
+  -days 365
+  -keyout /root/data/certbot/www/privkey.pem
+  -out /root/data/certbot/www/fullchain.pem
+  -subj '/CN=localhost'" certbot
+fi
+
 # Make App Directory
 if [ ! -d "/root/app" ]; then
   echo "Installing Application..."
@@ -37,7 +49,6 @@ fi
 # Make App Directory
 echo "Pulling Master Branch..."
 cd /root/app || exit 1
-
 git pull origin master
 
 # Install PHP Dependencies
