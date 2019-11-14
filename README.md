@@ -3,8 +3,11 @@
 - http://localhost/horizon/dashboard
 - http://localhost/telescope/requests
 
-`git clone git@github.com:bayareawebpro/laravel-docker.git`
+```shell script
+git clone git@github.com:bayareawebpro/laravel-docker.git
 ```
+
+```dotenv
 DB_HOST=mysql
 CACHE_DRIVER=redis
 SESSION_DRIVER=redis
@@ -29,7 +32,7 @@ DB_PASSWORD=laravel
 - Supervisor (latest)
 
 ### Extensions
-```
+```shell script
 docker-compose exec php bash
 composer check-platform-reqs
 ```
@@ -78,7 +81,7 @@ The database host `REDIS_HOST=redis` references the docker service IP.
 - `docker-compose exec redis bash`
 
 Configure as Auto-Expiring Cache
-```
+```shell script
 redis-cli
 config set maxmemory 256mb
 config set maxmemory-policy allkeys-lru
@@ -86,14 +89,8 @@ config rewrite
 ```
 
 # DigitalOcean Image
-```
+```shell script
 git init .
 git remote add origin <repository-url>
 git pull origin master
-
-
-# CertBot
-```
-docker-compose run --rm --entrypoint "openssl req -x509 -nodes -newkey rsa:1024 -days 1 -keyout '/etc/letsencrypt/live/api.bayareawebpro.com/privkey.pem' -out '/etc/letsencrypt/live/api.bayareawebpro.com/fullchain.pem' -subj '/CN=localhost'" certbot
-docker-compose run certbot certonly --standalone --preferred-challenges http -d api.bayareawebpro.com
 ```

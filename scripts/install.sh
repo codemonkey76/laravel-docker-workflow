@@ -40,7 +40,7 @@ if [ ! -f "/root/app/src/.env" ]; then
   cp /root/app/src/.env.example /root/app/src/.env
 fi
 
-# Make App Directory
+# Pull Master Branch
 echo "Pulling Master Branch..."
 cd /root/app || exit 1
 git pull origin master
@@ -50,7 +50,15 @@ chown -R www-data: /root/app/src/storage
 
 # Install PHP Dependencies
 echo "Installing Dependancies..."
-docker-compose run --rm --name=php_composer --entrypoint "composer install" php
+docker-compose run --rm --name=php_composer --entrypoint "composer install
+--no-ansi
+--no-dev
+--no-interaction
+--no-plugins
+--no-progress
+--no-scripts
+--no-suggest
+--optimize-autoloader" php
 docker-compose run --rm --name=php_composer --entrypoint "php artisan key:generate" php
 
 echo "Starting Application..."
