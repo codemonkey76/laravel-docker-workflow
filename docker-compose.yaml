@@ -5,10 +5,8 @@ services:
     restart: always
     build: ./services/php
     volumes:
+      - ./services/php:/usr/local/etc/php
       - ./src:/var/www/html
-      - ./services/php/php-fpm.conf:/usr/local/etc/php/php-fpm.conf
-      - ./services/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
-      - ./data/php-fpm:/usr/local/var/log
     environment:
       PHP_IDE_CONFIG: "serverName=docker"
     depends_on:
@@ -19,9 +17,7 @@ services:
     build: ./services/php
     volumes:
       - ./src:/var/www/html
-      - ./services/php/php-fpm.conf:/usr/local/etc/php/php-fpm.conf
-      - ./services/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
-      - ./services/supervisor:/etc/supervisor/conf.d
+      - ./services/php:/usr/local/etc/php
     command: php artisan horizon
     depends_on:
       - redis
@@ -30,13 +26,9 @@ services:
     container_name: mysql
     restart: always
     build: ./services/mysql
-    #ports:
-    #  - 3306:3306 not needed, use "mysql" as the host name.
     volumes:
       - ./data/mysql:/var/lib/mysql
-      - ./services/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
-      - ./services/mysql/mysqldump.cnf:/etc/mysql/conf.d/mysqldump.cnf
-      - ./services/mysql/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+      - ./services/mysql/conf.d:/etc/mysql/conf.d
     environment:
       MYSQL_USER: laravel
       MYSQL_DATABASE: laravel
@@ -47,29 +39,23 @@ services:
     restart: always
     build: ./services/redis
     volumes:
-      - ./services/redis/redis.conf:/usr/local/etc/redis/redis.conf
       - ./data/redis:/data
+      - ./services/redis:/usr/local/etc/redis
     command:
       - /usr/local/etc/redis/redis.conf
-    #ports:
-    #  - 6379:6379 not needed, use "redis" as the host name.
   nginx:
     container_name: nginx
     restart: always
     build: ./services/nginx
-    command: "/bin/sh -c 'while :; do sleep 6h; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    #command: "/bin/sh -c 'while :; do sleep 6h; nginx -s reload; done & nginx -g \"daemon off;\"'"
     ports:
       - 443:443
       - 80:80
     volumes:
       - ./src:/var/www/html
-      - ./data/nginx:/var/log/nginx
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-      - ./services/nginx/sites:/etc/nginx/conf.d
-      - ./services/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./services/nginx/options-ssl-nginx.conf:/etc/nginx/options-ssl-nginx.conf
-      - ./services/nginx/ssl-dhparams.pem:/etc/nginx/ssl-dhparams.pem
+      - ./services/nginx:/etc/nginx
+      - ./data/letsencrypt/certs:/etc/letsencrypt
+      - ./data/letsencrypt/certs-data:/data/letsencrypt
     depends_on:
       - mysql
       - redis
@@ -77,9 +63,8 @@ services:
   certbot:
     container_name: certbot
     image: certbot/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h; done;'"
+    #entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h; done;'"
     depends_on:
       - nginx
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - ./data/letsencrypt:/data/letsencrypt
