@@ -33,6 +33,9 @@ RUN docker-php-ext-install pdo pdo_mysql
 ## Math (Telescope)
 RUN docker-php-ext-install bcmath
 
+## Zip
+RUN docker-php-ext-install zip
+
 ## Imagick
 # RUN apt-get update && apt-get install --no-install-recommends -y libmagickwand-dev
 # RUN pecl install imagick
@@ -41,6 +44,7 @@ RUN docker-php-ext-install bcmath
 ## Pcntl (Horizon)
 RUN pecl channel-update pecl.php.net
 RUN docker-php-ext-install pcntl
+RUN docker-php-ext-enable pcntl
 
 ## Redis
 RUN pecl install redis
