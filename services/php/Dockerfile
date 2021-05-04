@@ -1,7 +1,7 @@
 #FROM bayareawebpro/laravel-docker:latest
 
 # ======= Begin PHP Installer... =======
-FROM php:7.4-fpm
+FROM php:8.0.5-fpm
 RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y apt-utils
@@ -14,29 +14,29 @@ RUN apt-get install -y git
 
 ## Zip, UnZip
 RUN apt-get update && apt-get install -y libzip-dev zip unzip
-RUN docker-php-ext-configure zip --with-libzip
+RUN docker-php-ext-configure zip
 RUN docker-php-ext-install zip
 
 ## Cryptography (Encrypter)
-RUN apt-get update && apt-get install -y libmcrypt-dev
-RUN pecl install mcrypt-1.0.2
-RUN docker-php-ext-enable mcrypt
+#RUN apt-get update && apt-get install -y libmcrypt-dev
+#RUN pecl install mcrypt-1.0.2
+#RUN docker-php-ext-enable mcrypt
 
 ## MySql
 RUN apt-get update && apt-get install -y mysql-client-*
 RUN docker-php-ext-install pdo pdo_mysql
 
 ## Sqlite
-RUN apt-get update && apt-get install -y libsqlite3-dev
-RUN docker-php-ext-install pdo pdo_sqlite
+#RUN apt-get update && apt-get install -y libsqlite3-dev
+#RUN docker-php-ext-install pdo pdo_sqlite
 
 ## Math (Telescope)
 RUN docker-php-ext-install bcmath
 
 ## Imagick
-RUN apt-get update && apt-get install --no-install-recommends -y libmagickwand-dev
-RUN pecl install imagick
-RUN docker-php-ext-enable imagick
+# RUN apt-get update && apt-get install --no-install-recommends -y libmagickwand-dev
+# RUN pecl install imagick
+# RUN docker-php-ext-enable imagick
 
 ## Pcntl (Horizon)
 RUN pecl channel-update pecl.php.net
@@ -70,7 +70,7 @@ RUN apt-get install -y procps
 RUN mkdir -p /var/log/supervisor
 
 ##=== NodeJs ==================================================================#
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -y nodejs
 
 ## CleanUp
