@@ -1,4 +1,4 @@
-# Laravel Docker 2019
+# Laravel Docker 2021
 - http://localhost
 - http://localhost/horizon/dashboard
 - http://localhost/telescope/requests
@@ -20,10 +20,11 @@ DB_PASSWORD=laravel
 ```
 
 ### Environment
-- MySQL 5.7
-- PHP-FPM 7.3
-- NPM (latest)
-- NGINX (latest)
+- MySQL 8.0.24
+- PHP-FPM 8.0.5
+- NPM (latest):
+- NGINX 1.19.10
+- Redis 6.2.3
 - Laravel (latest)
 - Horizon (latest)
 - OpCache (latest)
