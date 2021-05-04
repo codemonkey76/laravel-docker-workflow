@@ -77,5 +77,5 @@ RUN apt-get install -y nodejs
 RUN apt-get autoremove
 
 ## Setup working directory
-RUN chown -R www-data:www-data /var/www/html
-WORKDIR /var/www/html
+RUN chown -R www-data:www-data /var/www
+WORKDIR /var/www

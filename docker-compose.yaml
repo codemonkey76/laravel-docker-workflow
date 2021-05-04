@@ -6,7 +6,7 @@ services:
     build: ./services/php
     volumes:
       - ./services/php:/usr/local/etc/php
-      - ./src:/var/www/html
+      - ./src:/var/www
     environment:
       PHP_IDE_CONFIG: "serverName=docker"
     depends_on:
@@ -16,7 +16,7 @@ services:
     container_name: worker
     build: ./services/php
     volumes:
-      - ./src:/var/www/html
+      - ./src:/var/www
       - ./services/php:/usr/local/etc/php
     command: php artisan horizon
     depends_on:
@@ -52,7 +52,7 @@ services:
       - 443:443
       - 80:80
     volumes:
-      - ./src:/var/www/html
+      - ./src:/var/www
       - ./services/nginx:/etc/nginx
       - ./data/letsencrypt/certs:/etc/letsencrypt
       - ./data/letsencrypt/certs-data:/data/letsencrypt
