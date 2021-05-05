@@ -29,8 +29,19 @@ DB_PASSWORD=laravel
 - Supervisor (latest)
 
 ### Instructions
+1. Clone laravel-docker repo
 ```shell script
 git clone git@github.com:codemonkey76/laravel-docker.git
+```
+2. Clone laravel app project (replace github link with link to project)
+```shell script
+git clone {githublink} app
+```
+3. Build and bring up docker containers
+```shell script
+cd laravel-docker
+docker-compose up -d --build
+```
 
 ### Extensions
 ```shell script
