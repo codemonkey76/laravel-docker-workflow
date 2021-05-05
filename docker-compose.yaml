@@ -1,7 +1,7 @@
 version: "3"
 services:
-  php:
-    container_name: php
+  app:
+    container_name: app
     restart: always
     build: ./services/php
     volumes:
@@ -21,7 +21,7 @@ services:
     command: php artisan horizon
     depends_on:
       - redis
-      - php
+      - app
   mysql:
     container_name: mysql
     restart: always
@@ -58,7 +58,7 @@ services:
     depends_on:
       - mysql
       - redis
-      - php
+      - app
   certbot:
     container_name: certbot
     image: certbot/certbot
