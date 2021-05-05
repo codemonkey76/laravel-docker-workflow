@@ -27,8 +27,7 @@ services:
     restart: always
     build: ./services/mysql
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./services/mysql/conf.d:/etc/mysql/conf.d
+            - mysql_data:/var/lib/mysql
     environment:
       MYSQL_USER: laravel
       MYSQL_DATABASE: laravel
@@ -44,16 +43,16 @@ services:
     command:
       - /usr/local/etc/redis/redis.conf
   nginx:
+    image: nginx:1.19.10
     container_name: nginx
     restart: always
-    build: ./services/nginx
     #command: "/bin/sh -c 'while :; do sleep 6h; nginx -s reload; done & nginx -g \"daemon off;\"'"
     ports:
       - 443:443
       - 80:80
     volumes:
       - ../app:/var/www
-      - ./services/nginx:/etc/nginx
+      - ./services/nginx/conf.d:/etc/nginx/conf.d
       - ./data/letsencrypt/certs:/etc/letsencrypt
       - ./data/letsencrypt/certs-data:/data/letsencrypt
     depends_on:
