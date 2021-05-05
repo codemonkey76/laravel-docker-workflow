@@ -3,10 +3,6 @@
 - http://localhost/horizon/dashboard
 - http://localhost/telescope/requests
 
-```shell script
-git clone git@github.com:codemonkey76/laravel-docker.git
-```
-
 ```dotenv
 DB_HOST=mysql
 CACHE_DRIVER=redis
@@ -31,6 +27,10 @@ DB_PASSWORD=laravel
 - xDebug (optional)
 - Memcached (latest)
 - Supervisor (latest)
+
+### Instructions
+```shell script
+git clone git@github.com:codemonkey76/laravel-docker.git
 
 ### Extensions
 ```shell script
