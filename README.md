@@ -37,11 +37,21 @@ git clone git@github.com:codemonkey76/laravel-docker.git
 ```shell script
 git clone {githublink} app
 ```
-3. Build and bring up docker containers
+
+3. Configure nginx conf file to your project
+Open services/nginx/conf.d/default.conf in your editor and replace example.com on
+line 3 and 10 with your domain.
+
+4. open the scripts/init-letsencrypt.sh file in your editor and replace the example.com with your own domain in the line
 ```shell script
-cd laravel-docker
-docker-compose up -d --build
+domains=(example.com www.example.com)
 ```
+
+5. Run the lets-encrypt script to obtain SSL certificate.
+```shell script
+scripts/init-letsencrypt.sh
+```
+This will build the containers, create dummy certificate bring up the containers and get the certificates and then replace the dummy certs and bring the containers back up.
 
 ### Extensions
 ```shell script
