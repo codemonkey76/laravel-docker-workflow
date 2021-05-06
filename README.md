@@ -21,7 +21,6 @@ DB_PASSWORD=laravel
 - NPM (latest):
 - NGINX 1.19.10
 - Redis 6.2.3
-- Laravel (latest)
 - Horizon (latest)
 - OpCache (latest)
 - xDebug (optional)
