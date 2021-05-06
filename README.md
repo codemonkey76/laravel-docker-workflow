@@ -31,7 +31,7 @@ DB_PASSWORD=laravel
 ### Instructions
 1. Clone laravel-docker repo
 ```shell script
-git clone git@github.com:codemonkey76/laravel-docker.git
+git clone git@github.com:codemonkey76/laravel-docker-workflow.git
 ```
 2. Clone laravel app project (replace github link with link to project)
 ```shell script
